@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Yaz Aesthetics – Advanced Aesthetic Treatments</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --gold-dark: #8a6a1f;
+    --cream: #fdf6ee;
+    --blush: #f3e4d7;
+    --rose: #d4907a;
+    --charcoal: #2a1f1a;
+    --text-soft: #6b4f3a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0f0a 0%, #2e1a10 40%, #1a0f0a 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 60px 20px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 80% 80%, rgba(212,144,122,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* bokeh circles */
+  .bokeh {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+    animation: bokehFloat 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .bokeh:nth-child(1)  { width:220px; height:220px; top:5%;  left:5%;  animation-delay:0s; }
+  .bokeh:nth-child(2)  { width:140px; height:140px; top:60%; left:80%; animation-delay:2s; }
+  .bokeh:nth-child(3)  { width:180px; height:180px; top:75%; left:10%; animation-delay:4s; }
+  .bokeh:nth-child(4)  { width:100px; height:100px; top:20%; left:75%; animation-delay:1s; }
+  .bokeh:nth-child(5)  { width:260px; height:260px; top:40%; left:55%; animation-delay:3s; opacity:.5; }
+
+  @keyframes bokehFloat {
+    0%,100% { transform: translateY(0) scale(1); opacity:.6; }
+    50%      { transform: translateY(-20px) scale(1.05); opacity:1; }
+  }
+
+  .hero-content { position: relative; z-index: 2; text-align: center; }
+
+  .hero-tagline {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    letter-spacing: .35em;
+    font-size: .7rem;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp .8s .2s forwards;
+  }
+
+  .hero-logo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    color: var(--gold);
+    letter-spacing: .1em;
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp .9s .4s forwards;
+  }
+
+  .hero-logo span { font-style: italic; color: var(--gold-light); }
+
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(.75rem, 2vw, 1rem);
+    letter-spacing: .5em;
+    color: rgba(201,168,76,.6);
+    margin-top: 8px;
+    opacity: 0;
+    animation: fadeUp .9s .6s forwards;
+  }
+
+  .gold-line {
+    display: flex; align-items: center; gap: 14px;
+    margin: 28px auto;
+    width: min(320px, 80vw);
+    opacity: 0;
+    animation: fadeUp .9s .8s forwards;
+  }
+  .gold-line::before, .gold-line::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .gold-line-diamond {
+    width: 8px; height: 8px; background: var(--gold);
+    transform: rotate(45deg); flex-shrink: 0;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    font-weight: 300;
+    color: #f5ece3;
+    letter-spacing: .08em;
+    opacity: 0;
+    animation: fadeUp .9s 1s forwards;
+  }
+
+  .hero-body {
+    font-size: .85rem;
+    color: rgba(245,236,227,.55);
+    letter-spacing: .12em;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeUp .9s 1.1s forwards;
+  }
+
+  .cta-row {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    margin-top: 44px;
+    opacity: 0;
+    animation: fadeUp .9s 1.3s forwards;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 32px; border-radius: 50px;
+    font-family: 'Raleway', sans-serif; font-weight: 500;
+    font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: transform .25s, box-shadow .25s, filter .25s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: #1a0f0a;
+    box-shadow: 0 6px 30px rgba(201,168,76,.35);
+  }
+  .btn-gold:hover { box-shadow: 0 10px 40px rgba(201,168,76,.55); filter: brightness(1.08); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid rgba(201,168,76,.45);
+  }
+  .btn-outline:hover { background: rgba(201,168,76,.08); border-color: var(--gold); }
+
+  .btn svg { width:18px; height:18px; fill:currentColor; flex-shrink:0; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(22px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* ── DISCOUNT BANNER ── */
+  .discount-banner {
+    background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    padding: 16px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .discount-banner::before {
+    content: '✦  ✦  ✦  ✦  ✦  ✦  ✦  ✦  ✦  ✦  ✦  ✦';
+    position: absolute; top: 50%; left: -20px;
+    transform: translateY(-50%);
+    letter-spacing: 10px; opacity: .15;
+    font-size: .6rem; color: #fff;
+    white-space: nowrap;
+  }
+  .discount-text {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(.9rem, 3vw, 1.2rem);
+    color: #1a0f0a;
+    letter-spacing: .15em;
+    position: relative;
+  }
+  .discount-text strong { font-size: 1.4em; }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Raleway', sans-serif; font-weight: 300;
+    letter-spacing: .4em; font-size: .65rem;
+    color: var(--gold); text-transform: uppercase;
+    text-align: center; margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300;
+    color: var(--charcoal); text-align: center;
+    letter-spacing: .05em; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-divider {
+    display: flex; align-items: center; gap: 12px; margin: 0 auto 56px;
+    width: min(240px, 70vw);
+  }
+  .section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .section-divider-gem { font-size: .6rem; color: var(--gold); }
+
+  /* ── TREATMENT CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 28px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 2px 24px rgba(42,31,26,.06);
+    transition: transform .35s, box-shadow .35s;
+    border: 1px solid rgba(201,168,76,.18);
+    position: relative;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 14px 48px rgba(42,31,26,.12); }
+
+  .card-header {
+    background: linear-gradient(135deg, #1a0f0a 0%, #2e1a10 100%);
+    padding: 28px 28px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-header::after {
+    content: '';
+    position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .card-icon { font-size: 1.3rem; margin-bottom: 8px; }
+
+  .card-title {
+    font-family: 'Cinzel', serif; font-size: 1rem;
+    color: var(--gold); letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+
+  .card-body { padding: 28px; }
+
+  .price-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 12px 0; border-bottom: 1px solid rgba(201,168,76,.12);
+    transition: background .2s;
+    border-radius: 4px;
+    padding-left: 8px; padding-right: 8px;
+    margin: 0 -8px;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row:hover { background: rgba(201,168,76,.06); }
+
+  .price-label {
+    font-size: .85rem; color: var(--text-soft); letter-spacing: .04em;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    font-weight: 600; color: var(--charcoal);
+  }
+
+  .price-prefix { font-size: .75rem; color: var(--text-soft); margin-right: 2px; }
+
+  /* ── SKIN BOOSTERS CARD ── */
+  .card-featured {
+    background: linear-gradient(135deg, #1a0f0a 0%, #2e1a10 100%);
+    border-color: rgba(201,168,76,.4);
+  }
+  .card-featured .card-header { background: transparent; padding-bottom: 0; }
+  .card-featured .card-body { padding-top: 20px; }
+  .card-featured .price-row { border-color: rgba(201,168,76,.18); }
+  .card-featured .price-label { color: rgba(245,236,227,.65); }
+  .card-featured .price-amount { color: var(--gold-light); }
+  .card-featured .price-prefix { color: rgba(201,168,76,.6); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: linear-gradient(135deg, #1a0f0a 0%, #2e1a10 100%);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-section .section-title { color: var(--cream); }
+  .contact-section .section-label { color: rgba(201,168,76,.7); }
+
+  .contact-description {
+    font-size: .9rem; color: rgba(245,236,227,.55);
+    letter-spacing: .08em; margin-bottom: 44px;
+    max-width: 420px; margin-left: auto; margin-right: auto;
+    margin-top: 0;
+  }
+
+  .contact-buttons {
+    display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+  }
+
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 40px; border-radius: 50px;
+    font-family: 'Raleway', sans-serif; font-weight: 500;
+    font-size: .85rem; letter-spacing: .18em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+    transition: transform .25s, box-shadow .25s, filter .25s;
+    min-width: 230px; justify-content: center;
+  }
+  .contact-btn:hover { transform: translateY(-3px); }
+
+  .contact-btn-call {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: #1a0f0a;
+    box-shadow: 0 8px 32px rgba(201,168,76,.35);
+  }
+  .contact-btn-call:hover { box-shadow: 0 14px 48px rgba(201,168,76,.55); filter: brightness(1.08); }
+
+  .contact-btn-whatsapp {
+    background: #128C7E;
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(18,140,126,.35);
+  }
+  .contact-btn-whatsapp:hover { box-shadow: 0 14px 48px rgba(18,140,126,.55); filter: brightness(1.1); }
+
+  .contact-btn svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+
+  .social-note {
+    margin-top: 40px;
+    font-size: .75rem; color: rgba(201,168,76,.5);
+    letter-spacing: .25em; text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d0705;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cinzel', serif; font-size: 1rem;
+    color: var(--gold); letter-spacing: .3em;
+    margin-bottom: 8px;
+  }
+  .footer-copy {
+    font-size: .7rem; color: rgba(201,168,76,.3);
+    letter-spacing: .18em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .cta-row { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 280px; justify-content: center; }
+    .contact-buttons { flex-direction: column; align-items: center; }
+    .contact-btn { width: 100%; max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+  <div class="bokeh"></div>
+
+  <div class="hero-content">
+    <p class="hero-tagline">Luxury Aesthetic Medicine</p>
+    <h1 class="hero-logo"><span>Dr.</span> Yaz</h1>
+    <p class="hero-sub">Aesthetics</p>
+
+    <div class="gold-line"><div class="gold-line-diamond"></div></div>
+
+    <h2 class="hero-headline">Advanced Aesthetic Treatments</h2>
+    <p class="hero-body">Enhance your natural beauty</p>
+
+    <div class="cta-row">
+      <a href="tel:07496539553" class="btn btn-gold">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        Call Now
+      </a>
+      <a href="https://wa.me/447496539553" target="_blank" class="btn btn-outline">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOUNT BANNER -->
+<div class="discount-banner">
+  <p class="discount-text">✦ &nbsp; Introductory Discount &nbsp; <strong>15% OFF</strong> &nbsp; All Treatments &nbsp; ✦</p>
+</div>
+
+<!-- TREATMENTS -->
+<div style="background: var(--cream);">
+  <div class="section">
+    <p class="section-label">Our Services</p>
+    <h2 class="section-title">Treatment Menu</h2>
+    <div class="section-divider"><span class="section-divider-gem">◆</span></div>
+
+    <div class="cards-grid">
+
+      <!-- Anti-Wrinkle -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">💉</div>
+          <h3 class="card-title">Anti-Wrinkle Injections</h3>
+        </div>
+        <div class="card-body">
+          <div class="price-row">
+            <span class="price-label">1 Area</span>
+            <span class="price-amount"><span class="price-prefix">£</span>150</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">2 Areas</span>
+            <span class="price-amount"><span class="price-prefix">£</span>200</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">3 Areas</span>
+            <span class="price-amount"><span class="price-prefix">£</span>240</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lip Fillers -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">💋</div>
+          <h3 class="card-title">Lip Fillers</h3>
+        </div>
+        <div class="card-body">
+          <div class="price-row">
+            <span class="price-label">0.5 ml</span>
+            <span class="price-amount"><span class="price-prefix">£</span>150</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">1 ml</span>
+            <span class="price-amount"><span class="price-prefix">£</span>220</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dermal Fillers -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">💎</div>
+          <h3 class="card-title">Dermal Fillers</h3>
+        </div>
+        <div class="card-body">
+          <div class="price-row">
+            <span class="price-label">Nasolabial Folds</span>
+            <span class="price-amount"><span class="price-prefix">£</span>220</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Cheeks</span>
+            <span class="price-amount"><span class="price-prefix">£</span>250</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Chin</span>
+            <span class="price-amount"><span class="price-prefix">£</span>220</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">Jawline</span>
+            <span class="price-amount">from <span class="price-prefix">£</span>300</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skin Boosters -->
+      <div class="card card-featured">
+        <div class="card-header">
+          <div class="card-icon">✨</div>
+          <h3 class="card-title" style="color: var(--gold-light);">Skin Boosters / Rejuvenation</h3>
+        </div>
+        <div class="card-body">
+          <div class="price-row">
+            <span class="price-label">Skin Booster Treatment</span>
+            <span class="price-amount">from <span class="price-prefix">£</span>150</span>
+          </div>
+          <p style="font-size:.78rem; color:rgba(245,236,227,.45); letter-spacing:.06em; margin-top:20px; line-height:1.7;">
+            Restore radiance, hydration &amp; luminosity with our tailored skin booster treatments. Ideal for dull, tired or dehydrated skin.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <div style="position:relative; z-index:1;">
+    <p class="section-label">Book Your Consultation</p>
+    <h2 class="section-title" style="margin-bottom:16px;">Get In Touch</h2>
+    <div class="section-divider" style="margin-bottom:24px;">
+      <span class="section-divider-gem">◆</span>
+    </div>
+    <p class="contact-description">
+      Ready to enhance your natural beauty? Reach out directly — we're available via call or WhatsApp.
+    </p>
+
+    <div class="contact-buttons">
+      <!-- Direct Call -->
+      <a href="tel:07496539553" class="contact-btn contact-btn-call">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        07496 539553
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/447496539553" target="_blank" class="contact-btn contact-btn-whatsapp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+
+    <p class="social-note">✦ &nbsp; Also available on Instagram &amp; WhatsApp DM &nbsp; ✦</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Dr. Yaz Aesthetics</p>
+  <p class="footer-copy">© 2026 Dr. Yaz Aesthetics · Advanced Aesthetic Treatments · Enhance your natural beauty</p>
+</footer>
+
+</body>
+</html>
